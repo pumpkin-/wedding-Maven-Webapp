@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diy.weeding.mapper.UserMapper">
+	<!-- 映射 resultMap -->
+	<resultMap type="com.diy.weedingsecretary.domain.User.User" id="userRM">
+	
+		<id property="id" column="id"/>
+		<result property="realName" column="realName"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="phoneNumber" column="phoneNumber"/>
+		<result property="nickName" column="nickName"/>
+		<result property="gender" column="gender"/>
+		<result property="marriageDate" column="marriageDate"/>
+		<result property="hometown" column="hometown"/>
+		<result property="age" column="age"/>
+		<result property="signature" column="signature"/>
+		<result property="avatar" column="avatar"/>
+	</resultMap>
+	<!-- 带条件查询(代码已删除) -->
+	<select id="userLogin" parameterType="com.diy.weedingsecretary.domain.User.User" resultMap="userRM">
+		SELECT * FROM tb_user
+		where username=#{username} and password=#{password}
+	</select>
+	<!-- 查询一条 -->
+	<select id="get" parameterType="int" resultMap="userRM">
+		select * from tb_user where id=#{id}
+	</select>
+		<!-- 查询一条 -->
+	<select id="selectByUsername" parameterType="String" resultMap="userRM">
+		select * from tb_user where username=#{username}
+	</select>
+	
+	<!-- 新增一条记录 默认 状态为1启用-->
+	<insert id="insert" parameterType="com.diy.weedingsecretary.domain.User.User">
+		insert into tb_user
+		(realName,username,password,phoneNumber,nickName,gender,marriageDate,hometown,age,signature,avatar)
+		values
+		(#{realName},#{username},#{password},#{phoneNumber},#{nickName},#{gender},#{marriageDate},#{hometown},#{age},#{signature},#{avatar})
+	</insert>
+	
+	<!-- 批量新增测试 -->
+	<insert id="insertBatch" parameterType="map">
+		insert into tb_user
+		(realName,username,password,phoneNumber,nickName,gender,marriageDate,hometown,age,signature,avatar)
+		values
+		<foreach collection="userList" item="u" separator=",">
+		(#{u.realName},#{u.username},#{u.password},#{u.phoneNumber},#{u.nickName},#{u.gender},#{u.marriageDate},#{u.hometown},#{u.age},#{u.signature},#{u.avatar})
+		</foreach>
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="com.diy.weedingsecretary.domain.User.User">
+		update tb_user
+		<set>
+			realName=#{realName},
+			<if test="username!=null and username!=''">username=#{username},</if>
+			<if test="password!=null and password!=''">password=#{password},</if>
+			phoneNumber=#{phoneNumber},
+			<if test="nickName!=null and nickName!=''">nickName=#{nickName},</if>
+			gender=#{gender},
+			marriageDate=#{marriageDate},
+			hometown=#{hometown},
+			age=#{age},
+			signature=#{signature},
+			<if test="avatar!=null and avatar!=''">avatar=#{avatar},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除一条 -->
+	<delete id="delete" parameterType="int">
+		delete from tb_user where id = #{id}
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch" parameterType="string">
+		delete from factory_c
+		 where FACTORY_ID in
+		 <foreach collection="array" item="id" open="(" close=")" separator=",">
+		 	#{id}
+		 </foreach>
+	</delete>
+	
+</mapper>
