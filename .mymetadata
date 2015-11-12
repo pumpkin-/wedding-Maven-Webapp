@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="wedding Maven Webapp"
+  id="myeclipse.1445826431660"
+  context-root="/wedding"
+  j2ee-spec="6.0"
+  archive="wedding Maven Webapp.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
