@@ -9,6 +9,7 @@ public class HttpData implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String json;
+	private MResult mResult;
 	private HttpParams httpParams;
 	
 	public HttpData() {
@@ -24,6 +25,12 @@ public class HttpData implements Serializable {
 	}
 	public void setJson(String json) {
 		this.json = json;
+	}
+	public MResult getmResult() {
+		return mResult;
+	}
+	public void setmResult(MResult mResult) {
+		this.mResult = mResult;
 	}
 	public HttpParams getHttpParams() {
 		return httpParams;

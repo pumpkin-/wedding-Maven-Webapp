@@ -37,4 +37,10 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 		return this.getSqlSession().selectOne(getNs() + "selectByUsername", username);
 	}
 
+	@Override
+	public User resetPassword(User user) {
+		
+		return this.getSqlSession().selectOne(getNs() + "resetPassword", user);
+	}
+
 }

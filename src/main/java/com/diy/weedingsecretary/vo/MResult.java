@@ -21,6 +21,11 @@ public class MResult {
 	
 	private Map<String,String> params;
 	
+	public MResult() {}
+	public MResult(Boolean success) {
+		this.success = success;
+	}
+	
 	public String getInfo() {
 		return info;
 	}

@@ -7,5 +7,5 @@ public interface UserDao extends BaseDao<User> {
 	
 	User userLogin(User user);
 	User selectByUsername(String username);
-	
+	User resetPassword(User user);
 }

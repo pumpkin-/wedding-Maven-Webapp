@@ -20,10 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="avatar" column="avatar"/>
 	</resultMap>
 	<!-- 带条件查询(代码已删除) -->
-	<select id="userLogin" parameterType="com.diy.weedingsecretary.domain.User.User" resultMap="userRM">
-		SELECT * FROM tb_user
-		where username=#{username} and password=#{password}
+	<select id="resetPassword" parameterType="com.diy.weedingsecretary.domain.User.User" resultMap="userRM">
+		update tb_user
+		<if test="password!=null and password!=''">password=#{password}</if>
+		where username=#{username}
 	</select>
+	
 	<!-- 查询一条 -->
 	<select id="get" parameterType="int" resultMap="userRM">
 		select * from tb_user where id=#{id}

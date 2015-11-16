@@ -89,24 +89,28 @@ public class UserServiceImpl implements UserService {
 	 * @param @param user
 	 * @param @return 设定文件
 	 * 
-	 * @return MResult 返回类型
+	 * @return UserInfo 返回类型
 	 * 
 	 * @throws
 	 */
-	public MResult updateUserInfo(String json) {
+	public UserInfo updateUserInfo(String json) {
+		UserInfo info = new UserInfo();
 		MResult mResult = new MResult();
 		User user = parseJsonToUser(json);
 		System.out.println(user);
 		if (user != null) {
 			if (update(user) > 0) {
 				mResult.setSuccess(true);
+				User updateUser = userDao.selectByUsername(user.getUsername());
+				info.setUser(user);
 			} else {
 				mResult.setSuccess(false);
 			}
 		} else {
 			mResult.setSuccess(false);
 		}
-		return mResult;
+		info.setmResult(mResult);
+		return info;
 
 	}
 
@@ -120,32 +124,39 @@ public class UserServiceImpl implements UserService {
 	 * @param @param user
 	 * @param @return 设定文件
 	 * 
-	 * @return MResult 返回类型
+	 * @return UserInfo 返回类型
 	 * 
 	 * @throws
 	 */
-	public MResult userRegiste(String json) {
-		MResult mResult = new MResult();
+	public UserInfo userRegisterOrResetPassword(String json) {
+		UserInfo info = new UserInfo();
+		MResult mResult = new MResult(false);
 		User user = parseJsonToUser(json);
-		User dbuser = userDao.selectByUsername(user.getUsername());
-		//用户已存在
-		if(dbuser != null) {
-			mResult.setSuccess(false);
+		//用户已存在 -- 重置密码
+		if(userDao.selectByUsername(user.getUsername()) != null) {
 			mResult.setInfo("用户已存在");
-			return mResult;
+			User user2 = userDao.resetPassword(user);
+			if(user2 != null) {
+				mResult.setSuccess(true);
+			}
+			info.setmResult(mResult);
+			info.setUser(user2);
+			return info;
 		}
 		if (user != null) {
 			if (insert(user) > 0) {
 				user = userDao.selectByUsername(user.getUsername());
 				mResult.setSuccess(true);
-				mResult.setInfo("注册成功");
+				mResult.setInfo("注册成功");				
 				mResult.setReverse1(user.getId()+"");
 			} else {
 				mResult.setSuccess(false);
 				mResult.setInfo("注册失败,请重试");
 			}
 		}
-		return mResult;
+		info.setmResult(mResult);
+		info.setUser(user);
+		return info;
 	}
 
 	/**
@@ -193,6 +204,23 @@ public class UserServiceImpl implements UserService {
 			User user = get(String.valueOf(json));
 			return user;
 		}
+	}
+
+	
+	@Override
+	public UserInfo getUserByUsername(String json) {
+		UserInfo info = new UserInfo();
+		MResult mResult = new MResult(false);
+		User user = null;
+		if (!StringUtils.isNullOrEmpty(json)) {
+			 user = userDao.selectByUsername(String.valueOf(json));
+			if(user!=null) {
+				mResult.setSuccess(true);
+			}
+		}
+		info.setmResult(mResult);
+		info.setUser(user);
+		return info;
 	}
 
 }
