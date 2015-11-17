@@ -32,6 +32,7 @@ public class BaseController {
 				jsonIn.append(line);
 			}
 			result = jsonIn.toString();
+			System.out.println("request ---------------");
 			System.out.println(result);
 			if (StringUtils.isNullOrEmpty(result)) {
 				return null;
@@ -50,6 +51,7 @@ public class BaseController {
 		String resultJson = null;
 		try {
 			resultJson = JSON.toJSONString(httpData);
+			System.out.println("response ----------------------------");
 			System.out.println(resultJson);
 			os = response.getOutputStream();
 

@@ -1,7 +1,5 @@
 package com.diy.weedingsecretary.dao.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.diy.weedingsecretary.dao.UserDao;
@@ -38,9 +36,8 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public User resetPassword(User user) {
-		
-		return this.getSqlSession().selectOne(getNs() + "resetPassword", user);
+	public int resetPassword(User user) {
+		return this.getSqlSession().update(getNs() + "resetPassword", user);
 	}
 
 }

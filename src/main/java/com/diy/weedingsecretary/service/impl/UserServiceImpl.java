@@ -134,13 +134,13 @@ public class UserServiceImpl implements UserService {
 		User user = parseJsonToUser(json);
 		//用户已存在 -- 重置密码
 		if(userDao.selectByUsername(user.getUsername()) != null) {
-			mResult.setInfo("用户已存在");
-			User user2 = userDao.resetPassword(user);
-			if(user2 != null) {
+			mResult.setInfo("修改密码");
+			int update = userDao.resetPassword(user);
+			if(update > 0) {
 				mResult.setSuccess(true);
 			}
 			info.setmResult(mResult);
-			info.setUser(user2);
+			info.setUser(userDao.selectByUsername(user.getUsername()));
 			return info;
 		}
 		if (user != null) {
@@ -211,9 +211,10 @@ public class UserServiceImpl implements UserService {
 	public UserInfo getUserByUsername(String json) {
 		UserInfo info = new UserInfo();
 		MResult mResult = new MResult(false);
+		//true 找到用户   false 未找到用户
 		User user = null;
 		if (!StringUtils.isNullOrEmpty(json)) {
-			 user = userDao.selectByUsername(String.valueOf(json));
+			 user = userDao.selectByUsername(String.valueOf(JSON.parseObject(json,String.class)));
 			if(user!=null) {
 				mResult.setSuccess(true);
 			}
