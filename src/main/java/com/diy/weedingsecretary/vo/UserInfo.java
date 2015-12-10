@@ -20,6 +20,8 @@ public class UserInfo {
 	private User user;
 	private MResult mResult;
 	
+	
+	
 	public User getUser() {
 		return user;
 	}

@@ -153,6 +153,24 @@
 		</dependency>
 
 		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
@@ -200,7 +218,7 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.5</version>
 		</dependency>
-	
+
 	</dependencies>
 	<build>
 		<finalName>jk1206</finalName>

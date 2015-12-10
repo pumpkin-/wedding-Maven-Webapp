@@ -8,5 +8,8 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/ueditor/jsp/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/ueditor/jsp/lib/json.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/ueditor/jsp/lib/ueditor-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
