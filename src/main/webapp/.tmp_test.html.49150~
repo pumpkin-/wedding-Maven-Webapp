@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test.html</title>
+        <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+        <meta http-equiv="description" content="this is my page">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+        <script type="text/javascript">
+        	
+			//var date = new Date();
+			//alert(date.getTime());
+			//alert(date.toLocaleDateString())
+	        //var i = 8;
+			//alert(i);
+			
+//			var sayHello = function (name){
+//				return "hello " + name;
+//			}
+//			alert(sayHello("孙嘉楠"));
+
+		var saySilly = function(name) {
+			return name + " 小混蛋";
+		}
+		alert(saySilly("胡梦颖"))
+			
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
